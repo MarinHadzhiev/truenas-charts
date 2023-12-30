@@ -3,7 +3,7 @@
         "healthy": true,
         "supported": true,
         "healthy_error": null,
-        "location": "/__w/charts/charts/charts/plex/1.7.59",
+        "location": "/__w/charts/truenas-charts/charts/plex-submarine/1.7.59",
         "last_update": "2023-12-30 09:03:58",
         "required_features": [
             "definitions/timezone",
