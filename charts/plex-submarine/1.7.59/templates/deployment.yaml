@@ -34,45 +34,41 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           ports:
           - name: pms
             protocol: TCP
-            containerPort: 32500
-          {{- if .Values.hostNetwork }}
-            hostPort: {{ .Values.plexServiceTCP.port }}
-          {{- else }}
-            hostPort: null
-          {{- end }}
+            containerPort: 32600
+            hostPort: 32500
           - name: plex-dlna
             protocol: TCP
-            containerPort: 32569
+            containerPort: 32669
           {{- if not .Values.hostNetwork }}
             hostPort: null
           {{- end }}
           - name: plex-dlna-udp
             protocol: UDP
-            containerPort: 1910
+            containerPort: 1710
           {{- if not .Values.hostNetwork }}
             hostPort: null
           {{- end }}
           - name: plex-gdm1
             protocol: UDP
-            containerPort: 32510
+            containerPort: 32610
           {{- if not .Values.hostNetwork }}
             hostPort: null
           {{- end }}
           - name: plex-gdm2
             protocol: UDP
-            containerPort: 32512
+            containerPort: 32612
           {{- if not .Values.hostNetwork }}
             hostPort: null
           {{- end }}
           - name: plex-gdm3
             protocol: UDP
-            containerPort: 32513
+            containerPort: 32613
           {{- if not .Values.hostNetwork }}
             hostPort: null
           {{- end }}
           - name: plex-gdm4
             protocol: UDP
-            containerPort: 32514
+            containerPort: 32614
           {{- if not .Values.hostNetwork }}
             hostPort: null
           {{- end }}
@@ -91,12 +87,12 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             {{ end }}
             {{ $envList = mustAppend $envList (dict "name" "TZ" "value" .Values.timezone) }}
             {{ $envList = mustAppend $envList (dict "name" "PLEX_CLAIM" "value" .Values.claimToken) }}
-            {{ $envList = mustAppend $envList (dict "name" "PMS_INTERNAL_ADDRESS" "value" (printf "http://%s:32500" (include "common.names.fullname" .))) }}
+            {{ $envList = mustAppend $envList (dict "name" "PMS_INTERNAL_ADDRESS" "value" (printf "http://%s:32600" (include "common.names.fullname" .))) }}
             {{ $envList = mustAppend $envList (dict "name" "PMS_IMAGE" "value" (printf "%s:%s" .Values.image.repository .Values.image.tag))}}
             {{ include "common.containers.environmentVariables" (dict "environmentVariables" $envList) | nindent 12 }}
           readinessProbe:
             tcpSocket:
-              port: 32500
+              port: 32600
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
@@ -104,7 +100,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             successThreshold: 2
           livenessProbe:
             tcpSocket:
-              port: 32500
+              port: 32600
             initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 5
@@ -112,7 +108,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
             successThreshold: 1
           startupProbe:
             tcpSocket:
-              port: 32500
+              port: 32600
             initialDelaySeconds: 10
             periodSeconds: 5
             timeoutSeconds: 2
