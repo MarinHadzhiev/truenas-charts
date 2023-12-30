@@ -35,7 +35,7 @@ spec: {{ include "common.deployment.common_spec" . | nindent 2 }}
           - name: pms
             protocol: TCP
             containerPort: 32600
-            hostPort: 32500
+            hostPort: 32600
           - name: plex-dlna
             protocol: TCP
             containerPort: 32669
