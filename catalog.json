@@ -1,6 +1,6 @@
 {
     "charts": {
-        "plex_submarine": {
+        "plex-submarine": {
             "app_readme": "<h1>Plex</h1>\n<p>Plex chart is a chart designed to deploy plex in a TrueNAS SCALE kubernetes cluster.</p>",
             "categories": [
                 "media"
